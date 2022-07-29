@@ -1,0 +1,25 @@
+<html>
+<body>
+<script>
+	var avail=20,booked,festive;
+	booked=window.prompt("enter no of tickets","");
+	festive=window.prompt("enter y/n","");
+	if(booked>avail || booked<=0)
+	{
+		document.write("Booking is not possible");
+	}
+	else{
+		var cost=booked*150;
+	if(festive=='n')
+	{
+		document.write("Total cost is"+cost);
+	}
+	if(festive=='y')
+	{
+		per=cost*0.1;
+		document.write("Total cost with discount is "+per);
+	}
+	}
+</script>
+</body>
+</html>

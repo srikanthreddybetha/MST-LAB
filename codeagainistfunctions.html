@@ -1,0 +1,28 @@
+CODE:
+function tester() {
+  alert("Hello! I am an alert box!");
+}
+tester();
+
+
+OUTPUT:
+referenceError:alert is not defined
+
+
+
+
+CODE:
+function tester() {
+  var message;
+  if (confirm("Press a button!")) {
+    message = "You pressed OK!";
+  } else {
+    message = "You pressed Cancel!";
+  }
+  console.log(message);
+}
+tester();
+
+
+OUTPUT:
+  referenceError:confirm is not defined

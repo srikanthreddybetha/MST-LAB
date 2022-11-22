@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>
+var count=0;
+function as()
+{
+setTimeout("fun1()",500);
+}
+function fun1()
+{
+var a =new 
+Array("red","yellow");
+if(count<=1)
+{
+document.bgColor=a[count++];
+setTimeout("fun1()",500);
+}
+else
+{
+count=0;
+as();
+}
+}
+</script>
+</head>
+<body bgcolor=white onload=as()>
+</body>
+</html>

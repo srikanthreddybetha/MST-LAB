@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    </title>
+    <script>
+        movie=window.prompt("ENTER THE MOVIE NAME : ");
+        n=4;
+        a=["HERO ","HEROINE ","DIRECTOR","PRODUCER"];
+        for(i=0;i<n;i++) {
+            a[i]=window.prompt(a[i]);
+        }
+        rating=parseFloat(window.prompt("Rating :"));
+        language=window.prompt("Language :");
+        document.write("Movie name : "+movie+"<br>");
+        document.write("<u>Starring :</u><br>Hero :"+a[0]);
+        document.write("<br>Heroine : "+a[1]);
+        document.write("<br>Director : "+a[2]);
+        document.write("<br>Producer : "+a[3]);
+        document.write("<br>Rating : "+rating);
+        document.write("<br>Language : "+language);
+
+        document.write("<table border='2'><tr><td>Movie</td><td>Hero</td><td>Heroine</td><td>Rating</td><td>Language</td></tr>  <tr><td>"+movie+"</td> <td>"+a[0]+"</td> <td>"+a[1]+"</td> <td>"+rating+"</td> <td>"+language+"</td></tr>");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

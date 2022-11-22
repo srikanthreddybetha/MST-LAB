@@ -1,0 +1,65 @@
+USING HASH:
+EXAMPLE 1:
+  // Node.js program to demonstrate the	
+// crypto.createHash() method
+
+// Includes crypto module
+const crypto = require('crypto');
+
+// Defining key
+const secret = 'Hi';
+
+// Calling createHash method
+const hash = crypto.createHash('sha256', secret)
+					
+				// updating data
+				.update('How are you?')
+
+				// Encoding to be used
+				.digest('hex');
+
+// Displays output
+console.log(hash);
+
+OUTPUT:
+  df287dfc1406ed2b692e1c2c783bb5cec97eac53151ee1d9810397aa0afa0d89
+  
+  
+EXAMPLE 2:
+  CODE:
+    // Node.js program to demonstrate the	
+// crypto.createHash() method
+
+// Defining filename
+const filename = process.argv[1];
+
+// Includes crypto and fs module
+const crypto = require('crypto');
+const fs = require('fs');
+
+// Creating Hash
+const hash = crypto.createHash('sha256', 'Geeksforgeeks');
+
+// Creating read stream
+const input = fs.createReadStream(filename);
+
+input.on('readable', () => {
+
+// Calling read method to read data
+const data = input.read();
+if (data)
+	
+	// Updating
+	hash.update(data);
+else
+{
+	// Encoding and displaying filename
+	console.log(`${hash.digest('base64')} ${filename}`);
+}
+});
+console.log("Program done!");
+
+
+OUTPUT:
+  Program done!
+n95mt3468ZzAIwu/bbNU7dej6CoFkDRcNaJo7rGpLF4= index.js

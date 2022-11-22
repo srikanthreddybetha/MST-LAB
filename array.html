@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <h2 id="demo"></h2>
+    <script>
+        const arr2=["cars","bikes","trucks","auto"];
+        let join1=arr2.join(" and ");
+        document.write(join1);
+        arr2.push("jeeps")
+        document.write("<br>"+arr2)
+        arr2.pop()
+        document.write("<br>"+arr2)
+        arr2.shift()
+        document.write("<br>"+arr2)
+        arr2.unshift("cars")
+        document.write("<br>"+arr2)
+        const arr4=[1,2,3]
+        const arr3=arr4.concat(arr2)
+        document.write("<br>"+arr3)
+        n=window.prompt("enter no. of elements in array");
+        for(i=0;i<n;i++) {
+            arr[i]=window.prompt("enter element - "+(i+1));
+        }
+        document.write("<br>"+arr2);
+        document.getElementById("demo").innerHTML=arr2;
+
+    </script>
+</body>
+</html>

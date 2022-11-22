@@ -1,0 +1,224 @@
+Asynchronous approach:
+	CODE:
+		var fs = require("fs");
+
+		// Asynchronous read
+		fs.readFile('input.txt', function (err, data) {
+		if (err) {
+			return console.error(err);
+		}
+			console.log("Asynchronous read: " + data.toString());
+		});
+	
+	OUTPUT:
+		Asynchronous read: Rey Rajesh: This is my name
+
+Synchronous approach:
+	CODE:
+		var fs = require("fs");
+
+		// Synchronous read
+		var data = fs.readFileSync('input.txt');
+		console.log("Synchronous read: " + data.toString());
+	
+	OUTPUT:
+		Synchronous read: Rey Rajesh: This is my name
+
+METHODS commonly used in fs module:
+
+->Open a File: The fs.open() method is used to create, read, or write a file. The fs.readFile() method is only for reading the file and fs.writeFile() method is only for writing to the file, whereas fs.open() method does several operations on a file. First, we need to load the fs class which is a module to access the physical file system.
+				Syntax:fs.open(path, flags, mode, callback)
+  Parameters:
+
+  path: It holds the name of the file to read or the entire path if stored at other locations.
+  flags: Flags indicate the behavior of the file to be opened. All possible values are ( r, r+, rs, rs+, w, wx, w+, wx+, a, ax, a+, ax+).
+  mode: Sets the mode of file i.e. r-read, w-write, r+ -readwrite. It sets to default as readwrite.
+  err: If any error occurs.
+  data: Contents of the file. It is called after the open operation is executed.
+
+	CODE:
+		var fs = require("fs");
+
+		// Asynchronous - Opening File
+		console.log("opening file!");
+		fs.open('input.txt', 'r+', function(err, fd) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log("File open successfully");	
+		});
+	OUTPUT:
+		opening file!
+		File open successfully
+
+->Reading a File:
+	The fs.read() method is used to read the file specified by fd. This method reads the entire file into the buffer. 
+	 			Syntax:fs.read(fd, buffer, offset, length, position, callback)
+  Parameters:
+
+  fd: This is the file descriptor returned by fs.open() method.
+  buffer: This is the buffer that the data will be written to.
+  offset: This is the offset in the buffer to start writing at.
+  length: This is an integer specifying the number of bytes to read.
+  position: This is an integer specifying where to begin reading from in the file. If the position is null, data will be read from the current file position.
+  callback: It is a callback function that is called after reading of the file. It takes two parameters:
+  err: If any error occurs.
+  data: Contents of the file.
+
+	CODE:
+		var fs = require("fs");
+		var buf = new Buffer(1024);
+
+		console.log("opening an existing file");
+		fs.open('input.txt', 'r+', function(err, fd) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log("File opened successfully!");
+		console.log("reading the file");
+	
+		fs.read(fd, buf, 0, buf.length, 0, function(err, bytes){
+			if (err){
+				console.log(err);
+				}
+			console.log(bytes + " bytes read");
+	
+			// Print only read bytes to avoid junk.
+			if(bytes > 0){
+				console.log(buf.slice(0, bytes).toString());
+				}
+			});
+		});
+	OUTPUT:
+		opening an existing file
+		File opened successfully!
+		reading the file
+		40 bytes read
+		Rey Rajesh: This is my name
+
+->Writing to a File:
+	This method will overwrite the file if the file already exists. The fs.writeFile() method is used to asynchronously write the specified data to a file. By default, the file would be replaced if it exists. The ‘options’ parameter can be used to modify the functionality of the method.
+					 Syntax:fs.writeFile(path, data, options, callback)
+  Parameters:
+
+	path: It is a string, Buffer, URL, or file description integer that denotes the path of the file where it has to be written. Using a file descriptor will make it behave similarly to fs.write() method.
+	data: It is a string, Buffer, TypedArray, or DataView that will be written to the file.
+	options: It is a string or object that can be used to specify optional parameters that will affect the output. It has three optional parameters:
+	encoding: It is a string value that specifies the encoding of the file. The default value is ‘utf8’.
+	mode: It is an integer value that specifies the file mode. The default value is 0o666.
+	flag: It is a string value that specifies the flag used while writing to the file. The default value is ‘w’.
+	callback: It is the function that would be called when the method is executed.
+	err: It is an error that would be thrown if the operation fails.
+	
+	CODE:
+		var fs = require("fs");
+
+		console.log("writing into existing file");
+		fs.writeFile('input.txt', 'Rey Rajesh', function(err) {
+		if (err) {
+			return console.error(err);
+		}
+	
+		console.log("Data written successfully!");
+		console.log("Let's read newly written data");
+	
+		fs.readFile('input.txt', function (err, data) {
+			if (err) {
+				return console.error(err);
+				}
+			console.log("Asynchronous read: " + data.toString());
+			});
+		});
+	OUTPUT:
+		writing into existing file
+		Data written successfully!
+		Let's read newly written data
+		Asynchronous read: Rey Rajesh
+
+->Appending File:
+	The fs.appendFile() method is used to synchronously append the data to the file.
+				Syntax:fs.appendFile(filepath, data, options, callback);
+  Parameters:
+  filepath: It is a String that specifies the file path.
+  data: It is mandatory and it contains the data that you append to the file.
+  options: It is an optional parameter that specifies the encoding/mode/flag.
+  Callback: Function is mandatory and is called when appending data to file is completed.
+
+	CODE:
+		var fs = require('fs');
+
+		var data = "\nRey Rajesh";
+
+		// Append data to file
+		fs.appendFile('input.txt', data, 'utf8',
+
+		// Callback function
+		function(err) {
+			if (err) throw err;
+
+			// If no error
+			console.log("Data is appended to file successfully.")
+		});
+	OUTPUT:
+		Data is appended to file successfully.
+		Before Appending Data to input.txt file:
+		Rey Rajesh: This is my name
+		After Appending Data to input.txt file:
+		Rey Rajesh
+
+->Closing the File:
+	The fs.close() method is used to asynchronously close the given file descriptor thereby clearing the file that is associated with it. This will allow the file descriptor to be reused for other files. Calling fs.close() on a file descriptor while some other operation is being performed on it may lead to undefined behavior.
+						Syntax:fs.close(fd, callback)
+  Parameters:
+  fd: It is an integer that denotes the file descriptor of the file for which to be closed.
+  callback: It is a function that would be called when the method is executed.
+  err: It is an error that would be thrown if the method fails.
+	CODE:
+		// Close the opened file.
+		fs.close(fd, function(err) {
+		if (err) {
+			console.log(err);
+			}
+			console.log("File closed successfully.");
+		}
+	OUTPUT:
+		File closed successfully.
+
+->Delete a File:
+	The fs.unlink() method is used to remove a file or symbolic link from the filesystem. This function does not work on directories, therefore it is recommended to use fs.rmdir() to remove a directory.
+						 Syntax:fs.unlink(path, callback)
+  Parameters:
+  path: It is a string, Buffer or URL which represents the file or symbolic link which has to be removed.
+  callback: It is a function that would be called when the method is executed.
+  err: It is an error that would be thrown if the method fails.
+	CODE:
+		var fs = require("fs");
+
+		console.log("deleting an existing file");
+		fs.unlink('input.txt', function(err) {
+		if (err) {
+			return console.error(err);
+		}
+			console.log("File deleted successfully!");
+		});
+	OUTPUT:
+		deleting an existing file
+		File deleted successfully!
+->Reading a file from users entry:
+	CODE:
+		var fs = require("fs");
+		const prompt=require('prompt-sync')();
+
+		// Synchronous read
+		a=prompt("Enter a file name:");
+
+		var data = fs.readFileSync(a);
+		console.log(data.toString());
+	OUTPUT:
+		Enter a file name:input.txt
+		Rey Rajesh.This is my name
+
+
+
+
+	

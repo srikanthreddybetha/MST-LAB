@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var available=30;
+        n=10;
+        function movies(){
+        book=parseInt(window.prompt("Enter no.of tickets : ","1"));
+        
+        if(book>available){
+            window.alert("Tickets are not available Available tickets : "+available);
+        }
+        if(book>5){
+            window.alert("Only 5 tickets can be booked at a time");
+        }
+        else{
+            cost=book*150;
+           document.write("<br>Cost of tickets : "+book*150);
+           if(book<3){
+            discount=0;
+           }
+           else{
+            discount=(cost*10)/100;
+           }
+           
+           document.write("<br>Discount : "+discount);
+           document.write("<br>Total amount : "+(cost-discount));
+
+           
+        }
+    }
+    
+        for(i=1;i<=n;i++){
+        movies();
+        available=available-book;
+        document.write("available : "+available);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

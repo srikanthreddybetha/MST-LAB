@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var dat=new Date();
+        document.write(dat)
+        var dat2=new Date(4000);
+        document.write(dat2)
+        var dat3= new Date("October 13, 2013 11:13:00"); 
+        document.write("Datastring with day : " + dat3);
+        var dat4 = new Date(2002, 10, 24, 10, 33, 30, 0); 
+        document.write(dat4);
+        const days=["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THRUSDAY","FRIDAY","SATURDAY"]
+        var day=dat.getDay();
+        document.write(days[day])
+
+        document.write("<br>")
+
+        var gfg= "GFG";
+        let geeks = ' stands for GeeksforGeeks';
+        document.write(gfg.concat(geeks));
+        document.write("<br>")
+        document.write(geeks.endsWith('ks'));
+        document.write("<br>")
+        document.write(String.fromCharCode(69));
+        document.write(String.fromCharCode(97));
+        document.write("<br>")
+        document.write(gfg.indexOf('G')); 
+        document.write("<br>");
+        document.write(gfg.indexOf('GFa'));
+        document.write("<br>")
+        document.write(gfg.repeat(3));
+        document.write("<br>")
+        document.write(gfg.replace('FG', 'fg'));
+        document.write("<br>")
+        console.log(geeks.search('for'));
+    </script>
+</body>
+</html>
